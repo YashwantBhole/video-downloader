@@ -38,6 +38,8 @@ def download():
 
     return jsonify({"video_link": video_link})
 
+import os
+
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))  # Get Railway-assigned PORT
+    port = int(os.getenv("PORT", 8080))  # Get Railway-assigned PORT, default to 8080
     app.run(host="0.0.0.0", port=port)
