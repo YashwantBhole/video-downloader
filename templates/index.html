@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Video Downloader</title>
+    <link rel="icon" type="image/png" href="https://img.icons8.com/?size=100&id=106753&format=png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+        }
+        h2 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .message {
+            font-size: 16px;
+            font-style: italic;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        input {
+            padding: 10px;
+            width: 80%;
+            max-width: 400px;
+            border: none;
+            border-radius: 20px;
+            text-align: center;
+            outline: none;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background: #ff416c;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #ff4b2b;
+            transform: scale(1.1);
+        }
+        #downloadLink {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        a {
+            color: blue;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Spinner CSS */
+        .spinner {
+            height: 40px;
+            width: 40px;
+            border: 6px solid;
+            border-radius: 50%;
+            border-color: red black black black;
+            animation: rotate 1.5s linear infinite;
+            display: none;
+            margin-top: 20px;
+        }
+
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
+        }
+
+    </style>
+    <script>
+        async function downloadVideo() {
+            const url = document.getElementById("videoUrl").value;
+            if (!url) {
+                alert("Please enter a video URL!");
+                return;
+            }
+
+            document.getElementById("spinner").style.display = "block"; // Show spinner
+            document.getElementById("downloadLink").innerHTML = ""; // Clear previous messages
+
+            try {
+                const response = await fetch("/download", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ url })
+                });
+
+                const data = await response.json();
+                if (data.video_link) {
+                    document.getElementById("downloadLink").innerHTML = 
+                        `<a href="${data.video_link}" target="_blank">Download Video</a>`;
+                } else {
+                    document.getElementById("downloadLink").innerHTML = "❌ Error: " + data.error;
+                }
+            } catch (error) {
+                document.getElementById("downloadLink").innerHTML = "❌ Network Error!";
+            } finally {
+                document.getElementById("spinner").style.display = "none"; // Hide spinner
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Video Downloader </h2>
+    <p class="message">AI-Powered Engines Keep Software Highly Adaptive </p>
+    <input type="text" id="videoUrl" placeholder="🎥 Paste Video URL Here 🎥">
+    <button onclick="downloadVideo()">💾 Get Download Link</button>
+    <div id="spinner" class="spinner"></div>
+    <p id="downloadLink"></p>
+</body>
+</html>
