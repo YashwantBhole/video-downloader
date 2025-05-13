@@ -14,9 +14,7 @@ A lightweight and easy-to-use web-based video downloader built using **HTML (Fro
 
 ---
 
-## 📷 Screenshots
-
-![Home Page](screenshots/home.png)
+## ![Home Page](screenshots/home.png)
 > *Simple UI for pasting and downloading videos*
 
 ---
