@@ -54,35 +54,28 @@ Follow these steps to run the app locally:
      The app will run on:
 🌐 http://127.0.0.1:5000
 
-📁 Project Structure
-csharp
-Copy
-Edit
-simple-video-downloader/
-│
-├── templates/
-│   └── index.html           # Frontend HTML
-│
-├── static/                  # CSS, JS, assets
-│
-├── app.py                   # Main Flask application
-├── requirements.txt         # Python dependencies
-└── README.md
-📌 Dependencies
-txt
-Copy
-Edit
-Flask
-pytube
+ 📁 Project Structure
+ 
+     csharp
+
+    simple-video-downloader/
+    ├── templates/
+    │
+    │   └── index.html           # Frontend HTML
+    │
+    ├── static/                  # CSS, JS, assets
+    │
+    ├── app.py                   # Main Flask application
+    ├── requirements.txt         # Python dependencies
+    └── README.md
+ 📌 Dependencies
+      txt
+      Flask
+      pytube
 You can install them with:
 
-bash
-Copy
-Edit
-pip install Flask pytube
-❗ Disclaimer
-This app is intended for educational purposes only. Please ensure you comply with the terms and conditions of any platform you download videos from.
+   ```bash
+   pip install Flask pytube
 
-🧑‍💻 Author
-Created by Your Name
+
 
